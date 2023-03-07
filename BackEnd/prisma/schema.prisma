@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  password String
+  email    String @unique
+
+  @@unique([name])
+  @@index([email])
+}
+
+model BookMarked {
+  id     String @id @default(uuid())
+  userId String
+  postId String
+  table  String
+}
+
+model FishPost {
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  path        String?
+}
+
+model SeaPost {
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  path        String?
+}
